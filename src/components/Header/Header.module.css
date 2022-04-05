@@ -1,0 +1,16 @@
+.header{
+    grid-area: h;
+    background-color: rgba(102, 205, 170, 1);
+    border-bottom-right-radius: 5px ;
+    display: flex;
+    flex-direction: row;
+    vertical-align: center;
+}
+.header img{
+    margin-left: 15px;
+}
+.header h1{
+    color: white;
+    font-family: BATAVIA;
+    padding-left: 10px;
+}

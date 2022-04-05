@@ -1,0 +1,65 @@
+.nav {
+    grid-area: n;
+    background-color: rgba(102, 205, 170, 1);
+    border-top-right-radius: 5px;
+    padding: 20px;
+}
+
+.item a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.item a.activeLink {
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    box-shadow: 2px 2px 2px black;
+}
+
+.friends {
+    padding-top: 50px;
+}
+
+.friends h3 {
+    color: white;
+    font-size: 30px;
+    font-style: italic;
+    font-family: Arial;
+    text-align: center;
+}
+
+.friendsCards {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+}
+
+.friendCard {
+    width: 55px;
+}
+
+.friendCard:hover {
+    box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.5);
+}
+
+.friendCard:active {
+    box-shadow: 0px 2px 0px rgba(0, 112, 112, 0.5);
+}
+
+.friendCard img {
+    width: 45px;
+    border-radius: 40px;
+    text-align: center;
+}
+
+.friendCard a {
+    text-decoration: none;
+    color: white;
+    padding-left: 5px;
+    text-align: center;
+}
+
+
+
+
