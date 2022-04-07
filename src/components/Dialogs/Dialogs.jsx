@@ -10,8 +10,7 @@ const Dialogs = (props) => {
     let newMessageElement = createRef();
 
     let onSendMessage = () => {
-        let text = newMessageElement.current.value;
-        props.sendMessage(text);
+        props.sendMessage();
     }
     let onDialogChange = () => {
         let text = newMessageElement.current.value;
