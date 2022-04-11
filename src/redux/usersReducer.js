@@ -3,8 +3,8 @@ const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
 
 let initialState = {
-    users: [
-        {
+     users: [
+        /*{
             id: 1,
             photoUrl: 'https://otvet.imgsmail.ru/download/25182015_48ee296f9b4110cccedb462b9a8579de_800.jpg',
             followed: true,
@@ -27,7 +27,7 @@ let initialState = {
             fullName: 'Alex D.',
             status: 'I love mai',
             location: {city: 'Moscow', country: 'Russia'}
-        }
+        }*/
     ]
 }
 

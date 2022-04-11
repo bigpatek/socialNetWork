@@ -1,4 +1,43 @@
 .userPhoto{
-    width: 150px;
-    height: 150px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+}
+.userContainer{
+    margin-top: 30px;
+    display: flex;
+    margin-left: 30px;
+    height: 130px;
+}
+.userFollow{
+    text-align: center;
+}
+.userInfo {
+    margin-left: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+    border: 2px solid black;
+    border-radius: 20px;
+    display: flex;
+}
+.userInfo .userAbout + .userLocation{
+    padding-left: 100px;
+}
+.userAbout{
+}
+.userName{
+    font-size: 20px;
+}
+.userStatus{
+    padding-top: 50px;
+    font-weight: 1;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+.userLocation{
+    padding-top: 25px;
+    font-size: 20px;
+    font-weight: 1;
+    letter-spacing: 1px;
+    margin-right: 20px;
 }
