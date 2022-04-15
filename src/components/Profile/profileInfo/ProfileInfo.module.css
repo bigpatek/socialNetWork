@@ -4,10 +4,15 @@
 }
 
 .aboutMe {
-    padding: 10px
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
 }
-
+.aboutMe div+div{
+    padding-left: 15px;
+}
 .aboutMe img {
+    margin-right: 15px;
     width: 200px;
     border: 5px solid mediumaquamarine;
 }
