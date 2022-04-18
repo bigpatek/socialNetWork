@@ -27,6 +27,7 @@ const MyPosts = (props) => {
                 </div>
             </div>
             <div className={c.posts}>
+                <hr/>
                 {postsElements}
             </div>
         </div>
