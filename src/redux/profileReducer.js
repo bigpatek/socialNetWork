@@ -1,3 +1,6 @@
+import axios from "axios";
+import {profileAPI} from "../api/api";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
 const SET_USERS_PROFILE = 'SET-USERS-PROFILE';
@@ -50,4 +53,14 @@ export const actionCreatorAddPost = () => ({type: 'ADD-POST'});
 export const actionCreatorUpdatePostText = (text) => ({type: 'UPDATE-POST-TEXT', postText: text});
 export const setUserProfile = (profile) => ({type: SET_USERS_PROFILE, profile});
 export const setLookJob = (isLooking) => ({type: SET_LOOK_JOB, isLooking});
+
+export const getProfile = (userId) => {
+    return (dispatch) => {
+        profileAPI.getProfile(userId)
+            .then(response => {
+                dispatch(setUserProfile(response.data));
+                dispatch(setLookJob(response.data.lookingForAJob));
+            })
+    }
+}
 export default profileReducer;

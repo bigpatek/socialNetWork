@@ -2,6 +2,9 @@ import React from 'react';
 import {actionCreatorAddMessage, actionCreatorUpdateMessageText} from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
+import {Navigate} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 /*const DialogsContainer = (props) => {
     return <StoreContext.Consumer>
@@ -21,11 +24,13 @@ import {connect} from "react-redux";
         </StoreContext.Consumer>
 }*/
 
+
+
 let mapStateToProps = (state) =>{
     return {
         dialogs: state.dialogsPage.dialogs,
         messages: state.dialogsPage.messages,
-        newMessageText : state.dialogsPage.newMessageText
+        newMessageText : state.dialogsPage.newMessageText,
     }
 }
 let mapDispatchToProps = (dispatch) =>{
@@ -38,6 +43,9 @@ let mapDispatchToProps = (dispatch) =>{
         }
     }
 }
+export default compose(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs)
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dialogs);

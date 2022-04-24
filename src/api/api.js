@@ -13,5 +13,22 @@ export const usersAPI = {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => {
             return response.data;
         })
+    },
+    follow(userId){
+        return instance.post(`follow/${userId}`)
+    },
+    unfollow(userId){
+        return instance.delete(`follow/${userId}`)
     }
+}
+export const headerAPI = {
+    setAuth(){
+        return instance.get(`auth/me`)
+    }
+}
+export const profileAPI = {
+    getProfile(userId){
+        return instance.get(`profile/${userId}`);
+    }
+
 }

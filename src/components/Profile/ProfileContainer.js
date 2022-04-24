@@ -1,9 +1,11 @@
 import React from "react";
 import Profile from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
-import {setLookJob, setUserProfile} from "../../redux/profileReducer";
-import {useParams, useLocation, useNavigate, useMatch} from "react-router-dom";
+import {getProfile, setLookJob, setUserProfile} from "../../redux/profileReducer";
+import {useParams, useLocation, useNavigate, Navigate} from "react-router-dom";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import Dialogs from "../Dialogs/Dialogs";
+import {compose} from "redux";
 
 class ProfileContainer extends React.Component{
 
@@ -12,11 +14,7 @@ class ProfileContainer extends React.Component{
         if (userId === '') {
             userId = 2;
         }
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
-            .then(response => {
-                this.props.setUserProfile(response.data);
-                this.props.setLookJob(response.data.lookingForAJob);
-            })
+        this.props.getProfile(userId);
     }
     render(){
         return (
@@ -28,7 +26,7 @@ class ProfileContainer extends React.Component{
 let mapStateToProps = (state) => {
     return{
         profile: state.profilePage.profile,
-        isLook : state.profilePage.isLookingForAJob
+        isLook : state.profilePage.isLookingForAJob,
     }
 }
 function withRouter(Component) {
@@ -46,4 +44,14 @@ function withRouter(Component) {
     return ComponentWithRouterProp;
 };
 
-export default connect(mapStateToProps, {setUserProfile, setLookJob})(withRouter(ProfileContainer));
+
+compose(
+    connect(mapStateToProps, {setUserProfile, setLookJob, getProfile}),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer)
+
+let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
+
+
+export default connect(mapStateToProps, {setUserProfile, setLookJob, getProfile})(withRouter(AuthRedirectComponent));

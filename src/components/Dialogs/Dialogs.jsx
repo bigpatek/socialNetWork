@@ -2,6 +2,7 @@ import React, {createRef} from 'react';
 import c from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import {Navigate} from "react-router-dom";
 
 const Dialogs = (props) => {
     let dialogsElements = props.dialogs.map(d => (<DialogItem name={d.name} id={d.id}/>));
@@ -16,6 +17,8 @@ const Dialogs = (props) => {
         let text = newMessageElement.current.value;
         props.onDialogChange(text);
     }
+
+    if (props.isAuth === false) return <Navigate to={'/login'} />
     return (
         <div className={c.dialogs}>
             <div className={c.dialogsItems}>
