@@ -1,7 +1,3 @@
-.bgPhoto img {
-    width: 900px;
-    height: 300px;
-}
 
 .aboutMe {
     padding: 10px;
@@ -15,4 +11,5 @@
     margin-right: 15px;
     width: 200px;
     border: 5px solid mediumaquamarine;
+    border-radius: 5px;
 }

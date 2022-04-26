@@ -21,7 +21,7 @@ export const usersAPI = {
         return instance.delete(`follow/${userId}`)
     }
 }
-export const headerAPI = {
+export const authAPI = {
     setAuth(){
         return instance.get(`auth/me`)
     }

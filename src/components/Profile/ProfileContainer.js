@@ -4,14 +4,13 @@ import {connect} from "react-redux";
 import {getProfile, setLookJob, setUserProfile} from "../../redux/profileReducer";
 import {useParams, useLocation, useNavigate, Navigate} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
-import Dialogs from "../Dialogs/Dialogs";
 import {compose} from "redux";
 
 class ProfileContainer extends React.Component{
 
     componentDidMount() {
         let userId = this.props.router.params.userId;
-        if (userId === '') {
+        if (userId === undefined) {
             userId = 2;
         }
         this.props.getProfile(userId);
@@ -45,13 +44,10 @@ function withRouter(Component) {
 };
 
 
-compose(
+export default compose(
     connect(mapStateToProps, {setUserProfile, setLookJob, getProfile}),
     withRouter,
-    withAuthRedirect
 )(ProfileContainer)
 
-let AuthRedirectComponent = withAuthRedirect(ProfileContainer);
+/*let AuthRedirectComponent = withAuthRedirect(ProfileContainer);*/
 
-
-export default connect(mapStateToProps, {setUserProfile, setLookJob, getProfile})(withRouter(AuthRedirectComponent));

@@ -1,4 +1,4 @@
-import {headerAPI} from "../api/api";
+import {authAPI} from "../api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const UNFOLLOW = 'UNFOLLOW';
@@ -26,7 +26,7 @@ const authReducer = (state = initialState, action) => {
 export const setAuthUserData = (userId,email,login) => ({type: SET_USER_DATA, data: {userId, email, login}});
 export const setAuthThunk = () => {
     return (dispatch) => {
-        headerAPI.setAuth().then(response => {
+        authAPI.setAuth().then(response => {
             if(response.data.resultCode === 0) {
                 dispatch(setAuthUserData(response.data.data.id, response.data.data.email, response.data.data.login));
             }
