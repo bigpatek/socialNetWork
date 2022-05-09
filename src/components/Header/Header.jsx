@@ -9,7 +9,7 @@ const Header = (props) => {
             <h1>SocialTree</h1>
 
             <div className={c.loginBlock}>
-                { props.isAuth ? props.login : <NavLink to={'/login'}>Login</NavLink>}
+                { props.isAuth ? <div>{props.login} - <button onClick={props.logoutThunk}>log out</button></div> : <NavLink to={'/login'}>Login</NavLink>}
             </div>
         </header>
     );
