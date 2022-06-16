@@ -1,4 +1,5 @@
 import {authAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const UNFOLLOW = 'UNFOLLOW';
@@ -25,7 +26,7 @@ const authReducer = (state = initialState, action) => {
 export const setAuthUserData = (userId,email,login, isAuth) => ({type: SET_USER_DATA, data: {userId, email, login, isAuth}});
 export const setAuthThunk = () => {
     return (dispatch) => {
-        authAPI.setAuth().then(response => {
+        return authAPI.setAuth().then(response => {
             if(response.data.resultCode === 0) {
                 dispatch(setAuthUserData(response.data.data.id, response.data.data.email, response.data.data.login, true));
             }
@@ -38,6 +39,10 @@ export const loginThunk = (email, password, rememberMe) => {
         authAPI.login(email,password,rememberMe).then(response => {
             if(response.data.resultCode === 0) {
                 dispatch(setAuthThunk());
+            }
+            else{
+                let message = response.data.messages.length > 0 ? response.data.messages[0] : "Some error";
+                dispatch(stopSubmit("login", {_error: message}))
             }
         })
     }
