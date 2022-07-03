@@ -1,5 +1,7 @@
 import {profileAPI} from "../api/api";
+
 const ADD_POST = 'ADD-POST';
+const DELETE_POST = 'DELETE_POST';
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
 const SET_USERS_PROFILE = 'SET-USERS-PROFILE';
 const SET_LOOK_JOB = 'SET-LOOK-JOB';
@@ -36,19 +38,24 @@ const profileReducer = (state = initialState, action) => {
                 newPostText: action.postText
             };
         case SET_USERS_PROFILE:
-            return{
+            return {
                 ...state,
                 profile: action.profile
             };
         case SET_LOOK_JOB:
-            return{
+            return {
                 ...state,
                 isLookingForAJob: action.isLooking
             };
         case SET_STATUS:
-            return{
+            return {
                 ...state,
                 status: action.status
+            }
+        case DELETE_POST:
+            return {
+                ...state,
+                posts: state.posts.filter(p => p.id != action.id)
             }
         default:
             return state;
@@ -58,34 +65,23 @@ export const actionCreatorAddPost = (newPostText) => ({type: 'ADD-POST', newPost
 export const actionCreatorUpdatePostText = (text) => ({type: 'UPDATE-POST-TEXT', postText: text});
 export const setUserProfile = (profile) => ({type: SET_USERS_PROFILE, profile});
 export const setLookJob = (isLooking) => ({type: SET_LOOK_JOB, isLooking});
-export const setStatus = (status) => ({type: SET_STATUS, status})
+export const setStatus = (status) => ({type: SET_STATUS, status});
+export const deletePost = (id) => ({type: DELETE_POST, id});
 
-export const getProfile = (userId) => {
-    return (dispatch) => {
-        profileAPI.getProfile(userId)
-            .then(response => {
-                dispatch(setUserProfile(response.data));
-                dispatch(setLookJob(response.data.lookingForAJob));
-            })
-    }
+export const getProfile = (userId) => async (dispatch) => {
+    let response = await profileAPI.getProfile(userId)
+    dispatch(setUserProfile(response.data));
+    dispatch(setLookJob(response.data.lookingForAJob));
 }
 
-export const getStatus = (userId) => {
-    return (dispatch) => {
-        profileAPI.getStatus(userId)
-            .then(response => {
-                return dispatch(setStatus(response.data))
-            })
-    }
+export const getStatus = (userId) => async (dispatch) => {
+    let response = await profileAPI.getStatus(userId)
+    dispatch(setStatus(response.data));
 }
-export const updateStatus = (status) => {
-    return (dispatch) => {
-        profileAPI.updateStatus(status)
-            .then(response => {
-                if(response.data.resultCode === 0){
-                    return dispatch(setStatus(status))
-                }
-            })
+export const updateStatus = (status) => async (dispatch) => {
+    let response = await profileAPI.updateStatus(status)
+    if (response.data.resultCode === 0) {
+        return dispatch(setStatus(status))
     }
 }
 

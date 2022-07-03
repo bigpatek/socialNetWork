@@ -7,6 +7,7 @@ import {TextArea} from "../../Common/FormsControllers/FormsControllers";
 
 
 const MyPosts = (props) => {
+    console.log("RENDER");
     let postsElements = props.posts.map(p => (<Post message={p.message} likesCount={p.likesCount}/>));
 
 
