@@ -119,8 +119,8 @@ export const changePage = (currentPage, pageSize) => {
 
 const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) => {
     dispatch(toggleFollowingProgress(true, userId));
-    let response = await apiMethod;
-    if (response.data.resultCode === 0) {
+    let response = await apiMethod(userId);
+    if (response.data.resultCode == 0) {
         dispatch(actionCreator(userId));
     }
     dispatch(toggleFollowingProgress(false, userId));
@@ -128,16 +128,12 @@ const followUnfollowFlow = async (dispatch, userId, apiMethod, actionCreator) =>
 
 export const followThunk = (userId) => {
     return async (dispatch) => {
-        let apiMethod = usersAPI.follow.bind(usersAPI);
-        let actionCreator = followSuccess;
-        followUnfollowFlow(dispatch, userId, apiMethod, actionCreator);
+        followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), followSuccess);
     }
 }
 export const unfollowThunk = (userId) => {
     return async (dispatch) => {
-        let apiMethod = usersAPI.unfollow.bind(usersAPI);
-        let actionCreator = unfollowSuccess;
-        followUnfollowFlow(dispatch, userId, apiMethod, actionCreator);
+        followUnfollowFlow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), unfollowSuccess);
     }
 }
 

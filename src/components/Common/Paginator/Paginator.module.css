@@ -1,0 +1,22 @@
+.activePage {
+    font-weight: 600;
+}
+
+.pages {
+    margin-top: 20px;
+    margin-left: 50px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.pages span {
+    padding: 5px;
+    margin: 2px;
+}
+.pages span:hover{
+    color: mediumaquamarine;
+}
+.pages span:active{
+    color: lightskyblue;
+}
+
